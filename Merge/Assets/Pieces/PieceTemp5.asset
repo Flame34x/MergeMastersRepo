@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a3f745de8ac074b8c6dabd8e99562e, type: 3}
+  m_Name: PieceTemp5
+  m_EditorClassIdentifier: 
+  piece: {fileID: 6504506866232306797, guid: 82cc205d8d0b4ad4981e6639d7e06e8a, type: 3}
+  upgradePiece: {fileID: 11400000, guid: 60af5f428728e1d4491996c3c2568da0, type: 2}
+  score: 350
