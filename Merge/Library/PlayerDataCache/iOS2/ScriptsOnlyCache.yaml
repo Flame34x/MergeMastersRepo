@@ -12,7 +12,6 @@ ScriptsOnlyBuild:
     - MobileMove
     - PieceData
     - PlayButton
-    - RewardedAdsButton
     - ScoreManager
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -148,9 +147,6 @@ ScriptsOnlyBuild:
     fullTypeName: GameManager
     methodName: RestartLevel
   - assembly: Assembly-CSharp
-    fullTypeName: GameManager
-    methodName: RestartLevel
-  - assembly: Assembly-CSharp
     fullTypeName: AudioManager
     methodName: ChangeSFXVolume
   sceneClasses:
@@ -222,21 +218,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7072}
     - Class: 114
-      Script: {instanceID: 7482}
+      Script: {instanceID: 7420}
     - Class: 114
-      Script: {instanceID: 8844}
+      Script: {instanceID: 7484}
     - Class: 114
-      Script: {instanceID: 9082}
+      Script: {instanceID: 7710}
     - Class: 114
-      Script: {instanceID: 9206}
+      Script: {instanceID: 8848}
     - Class: 114
-      Script: {instanceID: 9776}
+      Script: {instanceID: 9086}
     - Class: 114
-      Script: {instanceID: 26256}
+      Script: {instanceID: 9210}
     - Class: 114
-      Script: {instanceID: 26274}
+      Script: {instanceID: 9780}
     - Class: 114
-      Script: {instanceID: 31744}
+      Script: {instanceID: 25762}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -323,9 +319,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7406}
     - Class: 114
-      Script: {instanceID: 7482}
+      Script: {instanceID: 7484}
     - Class: 114
-      Script: {instanceID: 9206}
+      Script: {instanceID: 9210}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1073,6 +1069,12 @@ ScriptsOnlyBuild:
     className: PlayButton
   - hash:
       serializedVersion: 2
+      Hash: ee80e0622185d5d80a7df84fdffeeeec
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Interstitial
+  - hash:
+      serializedVersion: 2
       Hash: 4f353524ce6564e40764f1ea080b2d85
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1125,6 +1127,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.SpriteShape.Runtime
     namespaceName: UnityEngine.U2D
     className: SpriteShapeController
+  - hash:
+      serializedVersion: 2
+      Hash: a947111d0643db0ab8fbd29ed8221794
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: AdsInitializer
   - hash:
       serializedVersion: 2
       Hash: 8bbce9932f67ad8e7f4eefec87800f94
@@ -1427,24 +1435,18 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 0e33afc165a50865dbfb94b17abe0613
+      Hash: f07ebe5e190473487c3014771e1b7c42
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: AdsInitializer
+    className: UnityAdsManager
   - hash:
       serializedVersion: 2
-      Hash: ee80e0622185d5d80a7df84fdffeeeec
+      Hash: 7f344c2f8ba126b5cd487a178dbf7ad0
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: Interstitial
-  - hash:
-      serializedVersion: 2
-      Hash: c9ef48d3f3833e8d4641269fe7372da3
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: RewardedAdsButton
+    className: UnityAdsExampleUI
   platform: 9
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Main.unity
-  playerPath: C:/Users/greyh/OneDrive/Desktop/MergeMastersIOSTestingBuild
+  playerPath: C:/Users/greyh/OneDrive/Desktop/IOSMergeMasters

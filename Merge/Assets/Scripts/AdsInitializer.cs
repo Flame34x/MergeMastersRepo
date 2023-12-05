@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -8,10 +9,6 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] bool _testMode = true;
     private string _gameId;
 
-    [SerializeField] RewardedAdsButton _rewardedAdsButton;
-
-
-    #region Singleton
     private static AdsInitializer _instance;
 
     public static AdsInitializer Instance
@@ -24,7 +21,7 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
                 if (_instance == null)
                 {
-                    GameObject managerObject = new GameObject("AdsInitializer");
+                    GameObject managerObject = new GameObject("GameManager");
                     _instance = managerObject.AddComponent<AdsInitializer>();
                 }
             }
@@ -32,25 +29,25 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
             return _instance;
         }
     }
-    #endregion
 
     void Awake()
     {
         InitializeAds();
+        
     }
 
     public void InitializeAds()
     {
 #if UNITY_IOS
-            _gameId = _iOSGameId;
+        _gameId = _iOSGameId;
 #elif UNITY_ANDROID
             _gameId = _androidGameId;
 #elif UNITY_EDITOR
-        _gameId = _androidGameId; //Only for testing the functionality in the Editor
+            _gameId = _androidGameId; //Only for testing the functionality in the Editor
 #endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(_gameId, _testMode, this);
+            Advertisement.Initialize("5491725", _testMode, this);
         }
     }
 
@@ -58,11 +55,6 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public void OnInitializationComplete()
     {
         Debug.Log("Unity Ads initialization complete.");
-
-        _rewardedAdsButton._iOSAdUnitId = _iOSGameId;
-        _rewardedAdsButton._androidAdUnitId = _androidGameId;
-        _rewardedAdsButton.LoadAd();
-        
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

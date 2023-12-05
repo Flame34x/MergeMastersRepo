@@ -356,8 +356,17 @@ public class GameManager : MonoBehaviour
         }
         if (!adShown)
         {
-            adShown = true;
-            AdsInitializer.Instance.gameObject.GetComponent<Interstitial>().ShowAd();
+            if (Interstitial.Instance.IsAdLoaded())
+            {
+                adShown = true;
+                Interstitial.Instance.ShowAd();
+            }
+            else
+            {
+                adShown = true;
+                Interstitial.Instance.LoadAd();
+                Interstitial.Instance.ShowAd();
+            }   
             
         }
     }

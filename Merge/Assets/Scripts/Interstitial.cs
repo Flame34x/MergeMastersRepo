@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -7,12 +8,36 @@ public class Interstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowL
     [SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
     string _adUnitId;
 
+    private bool _isAdLoaded = false;
+
+    private static Interstitial _instance;
+    public static Interstitial Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Interstitial>();
+
+                if (_instance == null)
+                {
+                    GameObject managerObject = new GameObject("GameManager");
+                    _instance = managerObject.AddComponent<Interstitial>();
+                }
+            }
+
+            return _instance;
+        }
+    }
+
     void Awake()
     {
         // Get the Ad Unit ID for the current platform:
         _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
             ? _iOsAdUnitId
             : _androidAdUnitId;
+
+        LoadAd();
     }
 
     // Load content to the Ad Unit:
@@ -26,15 +51,30 @@ public class Interstitial : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowL
     // Show the loaded content in the Ad Unit:
     public void ShowAd()
     {
-        // Note that if the ad content wasn't previously loaded, this method will fail
-        Debug.Log("Showing Ad: " + _adUnitId);
-        Advertisement.Show(_adUnitId, this);
+        if (_isAdLoaded)
+        {
+            // Note that if the ad content wasn't previously loaded, this method will fail
+            Debug.Log("Showing Ad: " + _adUnitId);
+            Advertisement.Show(_adUnitId, this);
+            _isAdLoaded = false;
+        }
+        else
+        {
+            return;
+        }
     }
 
     // Implement Load Listener and Show Listener interface methods: 
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
         // Optionally execute code if the Ad Unit successfully loads content.
+        Debug.Log($"Ad Loaded: {adUnitId}");
+        _isAdLoaded = true;
+    }
+
+    public bool IsAdLoaded()
+    {
+        return _isAdLoaded;
     }
 
     public void OnUnityAdsFailedToLoad(string _adUnitId, UnityAdsLoadError error, string message)
