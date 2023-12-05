@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 using FlameUtils;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     #region Attributes
     [Header("Attributes")]
-    public float speed = 5f;
+    public float speed = 10f;
     public float spawnSpeed;
     #endregion
 
@@ -41,9 +42,14 @@ public class GameManager : MonoBehaviour
     [Header("GameOver")]
     public GameObject gameOverScreen;
     public Dictionary<GameObject, GameObject> piecesClone;
+    private GameObject GOPanel;
+    private bool isGameOver = false;
+
+    public Image fadeImage;
+    public float fadeDuration = 4f;
     #endregion
 
-    
+
     [Header ("Ads")]
     private bool adShown = false;
 
@@ -98,22 +104,32 @@ public class GameManager : MonoBehaviour
     #region Update
     private void Update()
     {
-        HandleMouseInput();
-        UpdateGuidePosition();
+        if (isGameOver)
+        {
+            return;
+        }
+        else
+        {
+            HandleMouseInput();
+            UpdateGuidePosition();
+        }
     }
 
     private void HandleMouseInput()
     {
-        if (selectedPieceClone != null)
+        if (canDrop)
         {
-            if (Input.GetMouseButton(0))
+            if (selectedPieceClone != null)
             {
-                HandlePieceMovement();
-            }
+                if (Input.GetMouseButton(0))
+                {
+                    HandlePieceMovement();
+                }
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                HandlePieceDrop();
+                if (Input.GetMouseButtonUp(0))
+                {
+                    HandlePieceDrop();
+                }
             }
         }
     }
@@ -125,10 +141,7 @@ public class GameManager : MonoBehaviour
 
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 targetPos = new Vector3(mousePos.x, selectedPieceClone.transform.position.y, 0f);
-
-            selectedPieceClone.transform.position =
-                Vector3.Lerp(selectedPieceClone.transform.position, targetPos, Time.deltaTime * speed);
+            selectedPieceClone.transform.position = new Vector3(mousePos.x, selectedPieceClone.transform.position.y, selectedPieceClone.transform.position.z) ;
         }
     }
 
@@ -342,34 +355,82 @@ public class GameManager : MonoBehaviour
     #region Game Over
     private void GameOver()
     {
-        ScoreManager.Instance.GameOver();
+        isGameOver = true;
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0;
+
+        // Assuming the GameOver script is attached to the same object as gameOverScreen
+        GameOver gameOverScript = gameOverScreen.GetComponent<GameOver>();
+        if (gameOverScript != null)
+        {
+            gameOverScript.Move();
+        }
+
+        fadeImage.gameObject.SetActive(true);
+
+        GameObject[] pieces = GameObject.FindGameObjectsWithTag("Piece");
+
+        // Iterate over the array and trigger the "GameOver" animation for each piece
+        foreach (GameObject piece in pieces)
+        {
+            piece.GetComponent<Animator>().SetTrigger("GameOver");
+        }
+
+        StartCoroutine(ScreenFade());
+        ScoreManager.Instance.GameOver();
     }
 
-    public void RestartLevel()
+    IEnumerator ScreenFade()
     {
-        if (adShown)
+        // Ensure that the fade image is initialized properly (color and alpha)
+        fadeImage.color = new Color(0f, 0f, 0f, 0.5f); // Semi-transparent black
+
+        // Fade in
+        float timer = 0f;
+        while (timer < fadeDuration)
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            float alpha = Mathf.Lerp(0.5f, 1f, timer / fadeDuration); // Start at 0.5f for semi-transparency
+            fadeImage.color = new Color(0f, 0f, 0f, Mathf.Clamp(alpha, 0f, 0.5f)); // Clamp alpha between 0 and 1
+            timer += Time.unscaledDeltaTime; // Use unscaledDeltaTime to ignore time scale
+            yield return null;
         }
-        if (!adShown)
+
+        // Ensure that the fade image stays at a semi-transparent state
+        fadeImage.color = new Color(0f, 0f, 0f, 0.5f);
+
+        // You can add additional logic here if needed
+
+        // Do not fade out, just yield indefinitely to keep the fade state
+        while (true)
         {
-            if (Interstitial.Instance.IsAdLoaded())
-            {
-                adShown = true;
-                Interstitial.Instance.ShowAd();
-            }
-            else
-            {
-                adShown = true;
-                Interstitial.Instance.LoadAd();
-                Interstitial.Instance.ShowAd();
-            }   
-            
+            yield return null;
         }
     }
+
+
+    public void RestartLevel()
+        {
+            if (adShown)
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            if (!adShown)
+            {
+                if (Interstitial.Instance.IsAdLoaded())
+                {
+                    adShown = true;
+                    Interstitial.Instance.ShowAd();
+                }
+                else
+                {
+                    adShown = true;
+                    Interstitial.Instance.LoadAd();
+                    Interstitial.Instance.ShowAd();
+                }
+
+            }
+        }
+    
     #endregion
 
     private void ContinueGame()
