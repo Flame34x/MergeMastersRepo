@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     #region Initialization
     private void Start()
     {
+        Application.targetFrameRate = 60;
         piecesClone = new Dictionary<GameObject, GameObject>();
         piecesList = new List<GameObject>();
         SpawnPiece();

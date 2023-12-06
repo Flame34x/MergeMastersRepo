@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -969,9 +969,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 572.53326, y: 1027.0544, z: -31.574278}
+    m_Target: {x: 517.57214, y: 2264.3037, z: -6.0018997}
     speed: 2
-    m_Value: {x: 572.53326, y: 1027.0544, z: -31.574278}
+    m_Value: {x: 517.57214, y: 2264.3037, z: -6.0018997}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1021,9 +1021,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1737.7668
+    m_Target: 583.9537
     speed: 2
-    m_Value: 1737.7668
+    m_Value: 583.9537
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1085,9 +1085,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 1afbffff9a640000
+      m_SelectedIDs: ba6d0000
+      m_LastClickedID: 28090
+      m_ExpandedIDs: beefffffd0f1ffff1afbffff9c6200009a6400008a690000b26b0000ba6d0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1156,7 +1156,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1164,15 +1164,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 71
   m_LastFolders:
-  - Assets
+  - Assets/Scripts
   m_LastFoldersGridSize: 71
   m_LastProjectPath: C:\Users\greyh\MergeTryAgain\MergeMastersRepo\Merge
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: c4660000
-    m_LastClickedID: 26308
+    scrollPos: {x: 0, y: 234}
+    m_SelectedIDs: 1c670000
+    m_LastClickedID: 26396
     m_ExpandedIDs: 00000000c4660000c6660000c8660000ca660000cc660000ce660000d0660000d2660000d4660000d6660000d8660000da660000dc660000de66000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1228,8 +1228,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c62300002e61000048700000087b00001a830000fe9c0000aea6000092ae00005e670000cc620000d0620000d46200003c63000024630000266300002a6300002c6300002e6300003263000034630000366300006cd3000098630000a6630000a863000096630000aa630000e4630000b47200003e800000dc65000014730000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c62300002e61000048700000087b00001a830000fe9c0000aea6000092ae00005e670000cc620000d0620000d46200003c63000024630000266300002a6300002c6300002e6300003263000034630000366300006cd3000098630000a6630000a863000096630000aa630000e4630000b47200003e800000dc65000014730000f8650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
